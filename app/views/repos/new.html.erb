@@ -1,0 +1,23 @@
+<% content_for :title do %>new <%end%>
+
+
+<%= form_for @repo, :as => :repo, :url => repos_url, :method => :post do |f| %>
+	<p>	
+	 	<%= f.label :name %> <br/>
+		<%= f.text_field :name %> 
+	</p>
+	
+	<p> 
+		<%= f.label :category %> <br/>
+		<%= f.text_field :category %> 
+	</p>
+	
+	<p>	
+	 	<%= options_for_select(["RAILS", "IPHONE", "ANDROID", "HTML5"], :selected => "RAILS") %> <p>
+	</p>
+	
+	<p>
+		<%= f.submit "Create App"%> 
+	</p>
+
+<% end%>

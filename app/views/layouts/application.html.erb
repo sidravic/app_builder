@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>AppBuilder</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
+  <head>
+    <title>App Builder | <%= yield(:title) %></title>
+    <%= stylesheet_link_tag 'screen'  %>
+    <%= stylesheet_link_tag 'custom', :media => 'screen'  %>
+    <%= javascript_include_tag 'jquery', 'rails' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tag %>
+  </head>
+  
+  <body>
+    <div class="header">
+      <div class="container">
+        <div class="logo">App Builder</div>
+        <div class="primary-navigation">
+          <%#= render 'layouts/login_links' %>         
+        </div>
+      </div>
+    </div>
 
-<%= yield %>
+    <div class="content">
+      <div class="container">
+        <div class="flash">
+          <%# render "layouts/error_messages" %>
+        </div>
+        <%= yield %>
+        <%= debug(params) %>        
+      </div>      
+    </div>
 
-</body>
+    <div class="footer">
+      <div class="container">
+        <div class="primary-navigation">
+          <ul>
+            <li><%= link_to 'Home', '' %> |</li>
+            <li><%= link_to 'About', '' %> |</li>
+            <li><%= link_to 'Contact', '' %> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+	<%# render 'shared/tcpsocket'%>
+	<%# render 'shared/xmpp_client'%>
+
+  </body>
 </html>
