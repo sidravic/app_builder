@@ -1,23 +1,64 @@
 <% content_for :title do %>new <%end%>
 
-
-<%= form_for @repo, :as => :repo, :url => repos_url, :method => :post do |f| %>
+<div class='new-form shadow'>
+	<%= form_for @repo, :as => :repo, :url => repos_url, :method => :post do |f| %>
 	<p>	
-	 	<%= f.label :name %> <br/>
+		<%= f.label :name %> <br/>
+		<div class = 'error-message'>
+			<%= error_on(@repo, :name) if @repo.errors.any? %>
+		</div>
+
 		<%= f.text_field :name %> 
 	</p>
-	
+
 	<p> 
 		<%= f.label :category %> <br/>
-		<%= f.text_field :category %> 
-	</p>
-	
-	<p>	
-	 	<%= options_for_select(["RAILS", "IPHONE", "ANDROID", "HTML5"], :selected => "RAILS") %> <p>
-	</p>
-	
-	<p>
-		<%= f.submit "Create App"%> 
+		<div class = 'error-message'>
+			<%= error_on(@repo, :category) if @repo.errors.any? %>
+		</div>
+
+		<%= select('repo', 'category', ['RAILS','IPHONE', 'OTHER'], 
+			{:selected => 'RAILS'}) %> 
 	</p>
 
-<% end%>
+	<p>	
+		<%= f.label :test_framework %><br/>
+		<div class = 'error-message'>
+			<%= error_on(@repo, :name) if @repo.errors.any? %>
+		</div>
+
+		<%= select('repo', 'test_framework', ['TEST UNIT', 'RSPEC', 'OTHER'], 
+			{:selected => 'TEST UNIT', :include_blank => true}) %>
+	</p>
+
+	<p> 
+		<%= f.label :js_framework, "Javascript Framework"%> <br/>
+		<div class = 'error-message'>
+			<%= error_on(@repo, :name) if @repo.errors.any? %>
+		</div>
+
+		<%= select('repo', 'js_framework', ['PROTOTYPE', 'JQUERY', 'OTHER'], 
+			{:selected => 'PROTOTYPE', :include_blank => true})%>
+	</p>
+
+	<p>
+		<%= f.label :database, "Database" %><br/>
+		<div class = 'error-message'>
+			<%= error_on(@repo, :name) if @repo.errors.any? %>
+		</div>
+
+		<%= select('repo', 'database', ['SQLITE3','MYSQL', 'POSTGRES', 'ORACLE'])%>			
+	</p>
+
+	<p>
+		<%#= f.label :server, "Server" %><br/>
+		<%#= select(@repo, 'server',['WEBRICK', 'MONGREL', 'PASSENGER', 'THIN'])%>
+	</p>
+
+
+	<p>			
+		<%= f.submit "Create App", :class => 'submit'%> 
+	</p>
+
+	<% end%>
+</div>
